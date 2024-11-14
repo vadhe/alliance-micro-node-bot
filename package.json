@@ -1,0 +1,19 @@
+{
+  "name": "alliance-micro-node",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "bot automation hold and release alliance micro node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "vadhe",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "random-millisecond": "^1.0.4"
+  }
+}
