@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import randomMillisecond from "random-millisecond"
 const url = 'https://api.micro-node.alliancegames.xyz/user/tap';
 import * as readline from "readline";
 
@@ -24,15 +23,19 @@ let headers = {
     const tgId = await inputPayload("input tgid :")
     const initData = await inputPayload("input initData :")
     const hash = await inputPayload("input hash :")
-    let payload = {
-        "tgId": Number(tgId),
-        "initData": initData,
-        "hash": hash,
-        "milliseconds": randomMillisecond({ max: 42331 }),
-    
-    };
     const main = async () => {
         while (true) {
+            function getRandomTimeInSeconds(min = 3788, max = 4464) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            const randomTime = getRandomTimeInSeconds()
+            let payload = {
+                "tgId": tgId,
+                "initData": initData,
+                "hash": hash,
+                "milliseconds": randomTime,
+
+            };
             try {
                 const res = await fetch(url, { method: "POST", headers: headers, body: JSON.stringify(payload) })
                 const data = await res.json()
@@ -40,7 +43,7 @@ let headers = {
             } catch {
                 console.log("error")
             }
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            await new Promise(resolve => setTimeout(resolve, randomTime));
         }
     }
     main()
